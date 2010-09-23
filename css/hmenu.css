@@ -1,0 +1,5 @@
+.hmenu li { list-style: none; line-height: 1.5em; padding-left: 0; }
+.hmenu ul { padding-left: 1em; margin-left: 0; }
+.hmenu-item { }
+.hmenu-submenu { }
+.hmenu-bullet { float: left; width: 1.6em; color: #AAA; }
