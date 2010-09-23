@@ -35,7 +35,8 @@ module HMenu
           s += "<ul>"
         end
         children.sort.each do |child|
-          s += "<li>" << child.to_html_ul << "</li>"
+          css_class = child.hasChildren? ? 'hmenu-submenu' : 'hmenu-item'
+          s += "<li class=\"#{css_class}\">" << child.to_html_ul << "</li>"
         end
         s += "</ul>"
       end
