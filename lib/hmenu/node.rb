@@ -1,3 +1,5 @@
+# Thanks to: http://nadeausoftware.com/articles/2007/12/latency_friendly_hierarchical_menus_using_unicode_bullets_and_bit_javascript
+
 require 'tree'
 require 'hmenu/extensions/tree'
 
@@ -27,7 +29,11 @@ module HMenu
         end
       end
       if hasChildren?
-        s += "<ul>"
+        if isRoot? 
+          s += '<ul class="hmenu">'
+        else
+          s += "<ul>"
+        end
         children.sort.each do |child|
           s += "<li>" << child.to_html_ul << "</li>"
         end
