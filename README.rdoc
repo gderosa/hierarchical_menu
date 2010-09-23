@@ -1,0 +1,12 @@
+=Hierarchical Menu
+
+Hierarchical menu, based on rubytree gem. Outputs html (other formats
+planned) with optional JavaScript show/hide.
+
+==Author
+Copyright 2010 Guido De Rosa <guido.derosa@vemarsas.it>
+
+===License
+Same of RubyTree.
+
+
