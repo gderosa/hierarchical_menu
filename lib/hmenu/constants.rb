@@ -1,5 +1,14 @@
+require 'pathname'
+
 module HMenu
+
+  def self.rootdir_pathname
+    Pathname.new(__FILE__).dirname.realpath + '../..'
+  end
+  
+
   VERSION = '0.0.1'
   # TODO: manage symlinks...
-  ROOTDIR = File.expand_path(File.join File.dirname(__FILE__), '../..')
+  ROOTDIR = self.rootdir_pathname.to_s
+
 end
