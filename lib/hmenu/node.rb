@@ -5,29 +5,27 @@ require 'hmenu/extensions/tree'
 
 module HMenu
   class Node < Tree::TreeNode
+
     def to_html_ul
-      # TODO: use CSS+Javascript to show/hide subitems on click
       s = ""
-      if isRoot?
-        s << "<a href=\"/\">Home</a>"
-      else
-        if content 
-          if content[:href]
-            s << 
-              "<a class=\"hmenu-content\" " << 
-                "title=\"#{content[:desc]}\" " << 
-                "href=\"#{content[:href]}.html\">#{content[:name]}" <<
-              "</a>"
-          elsif content[:name]
-            s << 
-                '<span class="hmenu-content" title="' << (content[:desc] || '') << '">' << 
-                  (content[:name] || '') << 
-                '</span>'
-          end
-        else
-          s << '<span class="hmenu-content"' << name.capitalize << '</span>'
+
+      if content 
+        if content[:href]
+          s << 
+            "<a class=\"hmenu-content\" " << 
+              "title=\"#{content[:desc]}\" " << 
+              "href=\"#{content[:href]}\">#{content[:name]}" <<
+            "</a>"
+        elsif content[:name]
+          s << 
+              '<span class="hmenu-content" title="' << (content[:desc] || '') << '">' << 
+                (content[:name] || '') << 
+              '</span>'
         end
+      else
+        s << '<span class="hmenu-content"' << name.capitalize << '</span>'
       end
+
       if hasChildren?
 
         if isRoot? 
@@ -50,13 +48,18 @@ module HMenu
           s += "<li class=\"#{css_li_class}\">" << "<span class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></span>" << child.to_html_ul << "</li>"
 
         end
+
         s += "</ul>"
+
       end
+
       return s
     end
+
     def <=>(other) # for sorting
       n <=> other.n 
     end
+
     def n
       begin
         content[:n] ? content[:n] : 0
@@ -64,5 +67,6 @@ module HMenu
         0
       end
     end
+
   end
 end
