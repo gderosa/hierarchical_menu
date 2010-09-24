@@ -14,13 +14,13 @@ module HMenu
         if content 
           if content[:href]
             s << 
-              "<a " << 
+              "<a class=\"hmenu-content\" " << 
                 "title=\"#{content[:desc]}\" " << 
                 "href=\"#{content[:href]}.html\">#{content[:name]}" <<
               "</a>"
           elsif content[:name]
             s << 
-                '<span title="' << (content[:desc] || '') << '">' << 
+                '<span class="hmenu-content" title="' << (content[:desc] || '') << '">' << 
                   (content[:name] || '') << 
                 '</span>'
           end
