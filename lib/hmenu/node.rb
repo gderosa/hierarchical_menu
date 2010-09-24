@@ -35,8 +35,18 @@ module HMenu
           s += "<ul>"
         end
         children.sort.each do |child|
-          css_class = child.hasChildren? ? 'hmenu-submenu' : 'hmenu-item'
-          s += "<li class=\"#{css_class}\">" << '<span class="hmenu-bullet" onclick="toggle_submenu(this);"></span>' << child.to_html_ul << "</li>"
+
+          css_li_class = 
+              child.hasChildren? ? 
+                  'hmenu-submenu' : 
+                  'hmenu-item'
+          css_bullet_class = 
+              child.hasChildren? ? 
+                  'hmenu-bullet' : 
+                  'hmenu-bullet-nochildren'
+
+          s += "<li class=\"#{css_li_class}\">" << "<span class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></span>" << child.to_html_ul << "</li>"
+
         end
         s += "</ul>"
       end
