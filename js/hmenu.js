@@ -16,13 +16,22 @@ function toggle_submenu(e) {
 function reset_menus() {
   var li_tags=document.getElementsByTagName('LI');
   for (var li, i=0; li=li_tags[i]; i++) {
-    if (li.className.match('hmenu-item'))
-      for (var c, j=0; c=li.childNodes[j]; j++)
-        if (c.tagName=='SPAN' && c.className.match('hmenu-bullet')) { c.innerHTML=ITEM; }
-    if (li.className.match('hmenu-submenu'))
-      for (var c, j=0; c=li.childNodes[j]; j++)
-        if (c.tagName=='SPAN' && c.className.match('hmenu-bullet')) { c.innerHTML=CLOSE; }
-        else if (c.tagName=='UL') { c.style.display = 'none'; }
+    if (li.className.match('hmenu-item')) {
+      for (var c, j=0; c=li.childNodes[j]; j++) {
+        if (c.tagName=='SPAN' && c.className.match('hmenu-bullet')) { 
+          c.innerHTML=ITEM; 
+        }
+      }
+    }
+    if (li.className.match('hmenu-submenu')) {
+      for (var c, j=0; c=li.childNodes[j]; j++) {
+        if (c.tagName=='SPAN' && c.className.match('hmenu-bullet')) { 
+          c.innerHTML=CLOSE; 
+        }
+        else if (c.tagName=='UL') {
+          c.style.display = 'none';
+        }
+      }
+    }
   }
 }
-
