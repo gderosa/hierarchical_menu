@@ -1,6 +1,6 @@
-.hmenu li { list-style: none; line-height: 1.5em; padding-left: 0; }
-.hmenu ul { padding-left: 1em; margin-left: 0; }
+.hmenu li { list-style: none; /* line-height: 1.5em; padding-left: 0; */ }
+.hmenu ul { /* padding-left: 1em; margin-left: 0; */ }
 .hmenu-item { }
 .hmenu-submenu { }
-.hmenu-bullet, .hmenu-bullet-nochildren { float: left; width: 1.5em;}
+.hmenu-bullet, .hmenu-bullet-nochildren { float: left; margin-right: 0.4em;}
 .hmenu-bullet {cursor: pointer;}

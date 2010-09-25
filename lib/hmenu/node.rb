@@ -25,15 +25,17 @@ module HMenu
                 '</span>'
           end
         else
-          s << name.capitalize
+          s << '<span class="hmenu-content"' << name.capitalize << '</span>'
         end
       end
       if hasChildren?
+
         if isRoot? 
           s += '<ul class="hmenu">'
         else
           s += "<ul>"
         end
+
         children.sort.each do |child|
 
           css_li_class = 
