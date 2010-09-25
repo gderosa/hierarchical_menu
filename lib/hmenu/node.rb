@@ -6,24 +6,34 @@ require 'hmenu/extensions/tree'
 module HMenu
   class Node < Tree::TreeNode
 
-    def to_html_ul(opt_h={})
+    def to_html_ul(&block)
+      o = content.clone
+      if block.respond_to? :call
+        block.call(self, o)
+      end
+
       s = ""
 
-      if content 
-        if content[:href]
+      hmenu_content_class = "hmenu-content"
+
+      hmenu_content_class << " hmenu-root" if isRoot?
+
+      if o
+        hmenu_content_class << ' ' << o[:extra_class] if o[:extra_class]
+        if o[:href]
           s << 
-            "<a class=\"hmenu-content\" " << 
-              "title=\"#{content[:desc]}\" " << 
-              "href=\"#{content[:href]}\">#{content[:name]}" <<
+            "<a class=\"#{hmenu_content_class}\" " << 
+              "title=\"#{o[:desc]}\" " << 
+              "href=\"#{o[:href]}\">#{o[:name]}" <<
             "</a>"
-        elsif content[:name]
+        elsif o[:name]
           s << 
-              '<span class="hmenu-content" title="' << (content[:desc] || '') << '">' << 
-                (content[:name] || '') << 
+              "<span class=\"#{hmenu_content_class}\" title=\"" << (o[:desc] || '') << '">' << 
+                (o[:name] || '') << 
               '</span>'
         end
       else
-        s << '<span class="hmenu-content"' << name.capitalize << '</span>'
+        s << "<span class=\"#{hmenu_content_class}\"" << name.capitalize << '</span>'
       end
 
       if hasChildren?
@@ -35,20 +45,22 @@ module HMenu
         end
 
         children.sort.each do |child|
-          child.mangle!(opt_h[:mangler])
 
-          css_li_class = 
+          o = child.content.clone
+          if block.respond_to? :call
+            block.call(child, o)
+          end
+
+          css_li_class =  
               child.hasChildren? ? 
                   'hmenu-submenu' : 
                   'hmenu-item'
-          css_li_class << ' ' << child.content[:extra_class] if 
-              child.content[:extra_class]
           css_bullet_class = 
               child.hasChildren? ? 
                   'hmenu-bullet' : 
                   'hmenu-bullet-nochildren'
 
-          s += "<li class=\"#{css_li_class}\">" << "<span class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></span>" << child.to_html_ul(opt_h) << "</li>"
+          s += "<li class=\"#{css_li_class}\">" << "<span class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></span>" << child.to_html_ul(&block) << "</li>"
 
         end
 
@@ -71,11 +83,14 @@ module HMenu
       end
     end
 
-    protected
-
-    def mangle!(mangler)
-      if mangler.respond_to? :call
-        mangler.call(self)
+    def mangle_output(o, &block)
+      unless o
+        if block.respond_to? :call
+          o = {}
+          block.call(self, o)
+        else
+          o = content.dup
+        end
       end
     end
 
