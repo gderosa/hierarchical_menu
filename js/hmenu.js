@@ -25,13 +25,63 @@ function reset_menus() {
     }
     if (li.className.match('hmenu-submenu')) {
       for (var c, j=0; c=li.childNodes[j]; j++) {
-        if (c.tagName=='SPAN' && c.className.match('hmenu-bullet')) { 
-          c.innerHTML=CLOSE; 
-        }
-        else if (c.tagName=='UL') {
-          c.style.display = 'none';
+        if (any_descendant_className_match(c, 'hmenu-selected')) {
+          expand(c);
+        } else { 
+          collapse(c);  
         }
       }
     }
   }
 }
+
+function collapse(e) {
+  if (e.tagName=='SPAN' && e.className.match('hmenu-bullet')) { 
+    e.innerHTML=CLOSE; 
+  }
+  else if (e.tagName=='UL') {
+    e.style.display = 'none';
+  }
+}
+
+function expand(e) {
+  if (e.tagName=='SPAN' && e.className.match('hmenu-bullet')) { 
+    e.innerHTML=OPEN; 
+  }
+  else if (e.tagName=='UL') {
+    e.style.display = 'block';
+  }
+}
+
+function any_descendant_className_match(element, klassName) {
+
+  //debug('\n');
+  //debug('called: ' + element.tagName);
+  //if (element.className) {
+  //  debug('.' + element.className);
+  //}
+  //if (element.tagName && element.tagName.match('SPAN')) {
+  //  debug(': ' + element.innerHTML);
+  //}
+
+  if (element.className && element.className.match(klassName)) {
+    return true;
+  } 
+  else if (element.hasChildNodes) {
+    //debug(' (has child nodes)');
+    for (var c, i=0; c=element.childNodes[i]; i++) {
+      //debug('\n*');
+      //debug('-->[child]: ' + c.tagName + '.' + c.className);
+      if (any_descendant_className_match(c, klassName)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function debug(s) {
+  jsdbg = document.getElementById('jsdebug');
+  jsdbg.innerHTML = jsdbg.innerHTML + s;
+}
+

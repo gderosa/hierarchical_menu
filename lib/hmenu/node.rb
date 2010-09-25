@@ -55,6 +55,7 @@ module HMenu
               child.hasChildren? ? 
                   'hmenu-submenu' : 
                   'hmenu-item'
+          css_li_class << ' ' << o[:extra_class] if o[:extra_class]
           css_bullet_class = 
               child.hasChildren? ? 
                   'hmenu-bullet' : 
