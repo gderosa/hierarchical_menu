@@ -6,7 +6,7 @@ require 'hmenu/extensions/tree'
 module HMenu
   class Node < Tree::TreeNode
 
-    def to_html_ul
+    def to_html_ul(opt_h={})
       s = ""
 
       if content 
@@ -35,17 +35,20 @@ module HMenu
         end
 
         children.sort.each do |child|
+          child.mangle!(opt_h[:mangler])
 
           css_li_class = 
               child.hasChildren? ? 
                   'hmenu-submenu' : 
                   'hmenu-item'
+          css_li_class << ' ' << child.content[:extra_class] if 
+              child.content[:extra_class]
           css_bullet_class = 
               child.hasChildren? ? 
                   'hmenu-bullet' : 
                   'hmenu-bullet-nochildren'
 
-          s += "<li class=\"#{css_li_class}\">" << "<span class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></span>" << child.to_html_ul << "</li>"
+          s += "<li class=\"#{css_li_class}\">" << "<span class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></span>" << child.to_html_ul(opt_h) << "</li>"
 
         end
 
@@ -65,6 +68,14 @@ module HMenu
         content[:n] ? content[:n] : 0
       rescue
         0
+      end
+    end
+
+    protected
+
+    def mangle!(mangler)
+      if mangler.respond_to? :call
+        mangler.call(self)
       end
     end
 
