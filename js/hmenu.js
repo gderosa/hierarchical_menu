@@ -1,9 +1,14 @@
 // stongly based on http://nadeausoftware.com/articles/2007/12/latency_friendly_hierarchical_menus_using_unicode_bullets_and_bit_javascript
 
-//ITEM  = '\u00A0';
+/*
 ITEM  = '\u25E6';
 OPEN  = '\u25BC';
 CLOSE = '\u25BA';
+*/
+ITEM  = '\u25E6';
+OPEN  = '\u229F';
+CLOSE = '\u229E';
+
 
 function toggle_submenu(e) {
   if (e.innerHTML==OPEN || e.innerHTML==CLOSE) {
@@ -25,7 +30,18 @@ function reset_menus() {
     }
     if (li.className.match('hmenu-submenu')) {
       for (var c, j=0; c=li.childNodes[j]; j++) {
-        if (any_descendant_className_match(c, 'hmenu-selected')) {
+        if (
+            c.tagName == 'UL' && 
+            any_descendant_className_match(c, 'hmenu-selected')
+        ) {
+          expand(c);
+        } else if (
+            c.tagName == 'SPAN' &&
+            c.className.match('hmenu-bullet') &&
+            !c.parentNode.className.match('hmenu-selected') && 
+                //strict inequality
+            any_descendant_className_match(c.parentNode, 'hmenu-selected')
+        ) {
           expand(c);
         } else { 
           collapse(c);  
