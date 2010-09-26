@@ -1,14 +1,11 @@
+// Copyright 2010 Guido De Rosa
+// License: same of http://RubyTree.rubyforge.org/
+
 // stongly based on http://nadeausoftware.com/articles/2007/12/latency_friendly_hierarchical_menus_using_unicode_bullets_and_bit_javascript
 
-/*
-ITEM  = '\u25E6';
-OPEN  = '\u25BC';
-CLOSE = '\u25BA';
-*/
-ITEM  = '\u25E6';
-OPEN  = '\u229F';
-CLOSE = '\u229E';
-
+ITEM  = '\u25E6'; // WHITE BULLET
+OPEN  = '\u229F'; // SQUARED MINUS
+CLOSE = '\u229E'; // SQUARED PLUS
 
 function toggle_submenu(e) {
   if (e.innerHTML==OPEN || e.innerHTML==CLOSE) {
