@@ -54,25 +54,12 @@ function expand(e) {
 }
 
 function any_descendant_className_match(element, klassName) {
-
-  //debug('\n');
-  //debug('called: ' + element.tagName);
-  //if (element.className) {
-  //  debug('.' + element.className);
-  //}
-  //if (element.tagName && element.tagName.match('SPAN')) {
-  //  debug(': ' + element.innerHTML);
-  //}
-
   if (element.className && element.className.match(klassName)) {
     return true;
   } 
   else if (element.hasChildNodes) {
-    //debug(' (has child nodes)');
     for (var c, i=0; c=element.childNodes[i]; i++) {
-      //debug('\n*');
-      //debug('-->[child]: ' + c.tagName + '.' + c.className);
-      if (any_descendant_className_match(c, klassName)) {
+      if (any_descendant_className_match(c, klassName)) { // recursion
         return true;
       }
     }
