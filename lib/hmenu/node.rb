@@ -20,18 +20,14 @@ module HMenu
 
       if o
         hmenu_content_class << ' ' << o[:extra_class] if o[:extra_class]
+        s << "<span class=\"#{hmenu_content_class}\" title=\"" << (o[:desc] || '') << '">'
         if o[:href]
-          s << 
-            "<a class=\"#{hmenu_content_class}\" " << 
-              "title=\"#{o[:desc]}\" " << 
-              "href=\"#{o[:href]}\">#{o[:name]}" <<
-            "</a>"
+          s <<
+            "<a href=\"#{o[:href]}\">#{o[:name]}</a>" 
         elsif o[:name]
-          s << 
-              "<span class=\"#{hmenu_content_class}\" title=\"" << (o[:desc] || '') << '">' << 
-                (o[:name] || '') << 
-              '</span>'
+          s << (o[:name] || '')  
         end
+        s << '</span>'
       else
         s << "<span class=\"#{hmenu_content_class}\"" << name.capitalize << '</span>'
       end
