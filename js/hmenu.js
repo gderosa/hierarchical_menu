@@ -20,7 +20,7 @@ function reset_menus() {
   for (var li, i=0; li=li_tags[i]; i++) {
     if (li.className.match('hmenu-item')) {
       for (var c, j=0; c=li.childNodes[j]; j++) {
-        if (c.tagName=='SPAN' && c.className.match('hmenu-bullet')) { 
+        if (c.className.match('hmenu-bullet')) { 
           c.innerHTML=ITEM; 
         }
       }
@@ -33,7 +33,6 @@ function reset_menus() {
         ) {
           expand(c);
         } else if (
-            c.tagName == 'SPAN' &&
             c.className.match('hmenu-bullet') &&
             !c.parentNode.className.match('hmenu-selected') && 
                 //strict inequality
@@ -49,7 +48,7 @@ function reset_menus() {
 }
 
 function collapse(e) {
-  if (e.tagName=='SPAN' && e.className.match('hmenu-bullet')) { 
+  if (e.className.match('hmenu-bullet')) { 
     e.innerHTML=CLOSE; 
   }
   else if (e.tagName=='UL') {
@@ -58,7 +57,7 @@ function collapse(e) {
 }
 
 function expand(e) {
-  if (e.tagName=='SPAN' && e.className.match('hmenu-bullet')) { 
+  if (e.className.match('hmenu-bullet')) { 
     e.innerHTML=OPEN; 
   }
   else if (e.tagName=='UL') {

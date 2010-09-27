@@ -4,14 +4,13 @@
 .hmenu-submenu { }
 
 .hmenu-bullet, .hmenu-bullet-nochildren {
-  float: left; 
   width: 1.3em;
+  float: left;
   text-align: center;
-  border: 1px gray dotted;
 }
 
-li span.hmenu-content {
-  border: 1px yellow solid;
+.hmenu-content {
+  display; inline-block;
 }
 
 .hmenu-bullet {cursor: pointer;}

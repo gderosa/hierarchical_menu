@@ -7,6 +7,9 @@ module HMenu
   class Node < Tree::TreeNode
 
     def to_html_ul(&block)
+      ctag = 'div'
+      btag = 'div'
+
       o = content.clone
       if block.respond_to? :call
         block.call(self, o)
@@ -20,16 +23,16 @@ module HMenu
 
       if o
         hmenu_content_class << ' ' << o[:extra_class] if o[:extra_class]
-        s << "<span class=\"#{hmenu_content_class}\" title=\"" << (o[:desc] || '') << '">'
+        s << "<#{ctag} class=\"#{hmenu_content_class}\" title=\"" << (o[:desc] || '') << '">'
         if o[:href]
           s <<
             "<a href=\"#{o[:href]}\">#{o[:name]}</a>" 
         elsif o[:name]
           s << (o[:name] || '')  
         end
-        s << '</span>'
+        s << "</#{ctag}>"
       else
-        s << "<span class=\"#{hmenu_content_class}\"" << name.capitalize << '</span>'
+        s << "<#{ctag} class=\"#{hmenu_content_class}\"" << name.capitalize << "</#{ctag}>"
       end
 
       if hasChildren?
@@ -57,7 +60,7 @@ module HMenu
                   'hmenu-bullet' : 
                   'hmenu-bullet-nochildren'
 
-          s += "<li class=\"#{css_li_class}\">" << "<span class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></span>" << child.to_html_ul(&block) << "</li>"
+          s += "<li class=\"#{css_li_class}\">" << "<#{btag} class=\"#{css_bullet_class}\" onclick=\"toggle_submenu(this);\"></#{btag}>" << child.to_html_ul(&block) << "</li>"
 
         end
 
