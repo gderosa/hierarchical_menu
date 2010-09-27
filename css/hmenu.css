@@ -5,12 +5,13 @@
 
 .hmenu-bullet, .hmenu-bullet-nochildren {
   width: 1.3em;
-  float: left;
+  float: left; 
   text-align: center;
+  display: inline;
 }
 
 .hmenu-content {
-  display; inline-block;
+  display: inline;
 }
 
 .hmenu-bullet {cursor: pointer;}

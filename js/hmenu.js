@@ -3,9 +3,20 @@
 
 // stongly based on http://nadeausoftware.com/articles/2007/12/latency_friendly_hierarchical_menus_using_unicode_bullets_and_bit_javascript
 
+/*
 ITEM  = '\u25E6'; // WHITE BULLET
 OPEN  = '\u229F'; // SQUARED MINUS
 CLOSE = '\u229E'; // SQUARED PLUS
+
+ITEM  = '\u25E6'; // WHITE BULLET 
+OPEN  = '-';      // MINUS SIGN
+CLOSE = '+';      // PLUS SIGN
+*/
+
+ITEM  = '\u25CF'; // BLACK CIRCLE
+OPEN  = '\u25BC'; // BLACK DOWN-POINTING TRIANGLE
+CLOSE = '\u25BA'; // BLACK RIGHT-POINTING TRIANGLE
+
 
 function toggle_submenu(e) {
   if (e.innerHTML==OPEN || e.innerHTML==CLOSE) {
