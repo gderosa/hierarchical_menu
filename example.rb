@@ -21,9 +21,14 @@ root.add_path('/aaa/fff/ccc/eee', {
 })
 
 html_ul = root.to_html_ul do |node, output| # code block is optional!
-  output[:name] += ' (extra_info is just an Object)' if
+  if
       node.content.respond_to? :[] and
       node.content[:extra_info].class == Object
+
+    output[:name] += ' (extra_info is just an Object)'
+    output[:extra_class] = 'hmenu-selected'
+    output[:href] = nil
+  end
 end
 
 puts <<END # you may use a template system like ERB if you wish...
