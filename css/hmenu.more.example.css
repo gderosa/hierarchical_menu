@@ -17,7 +17,7 @@ a:hover   {
   background: blue; 
 } 
 
-.hmenu-bullet:hover  {
+span.hmenu-bullet:hover, div.hmenu-bullet:hover  {
   color: green;
 }
 
@@ -49,11 +49,16 @@ ul.hmenu li.hmenu-selected, ul.hmenu-submenu li.hmenu-selected {
 }
 ul.hmenu li, ul.hmenu-submenu li {
   padding: 0 5px;     /* 4px + 1px = 5px */
+  line-height: 1.7em;
 }
 
 span.hmenu-root, div.hmenu-root {
   font-weight: bold;
   border: none;
+}
+
+ul {
+  padding-left: 1em;
 }
 
 

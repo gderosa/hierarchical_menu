@@ -15,12 +15,20 @@ Simple example:
     # all keys are optional
     :name         => 'test2',
     :href         => '/xxx/yyy/2.html',
-    :extra_class  => 'my-css-class'
+    :n            => 10
+    :extra_class  => 'my-css-class hmenu-selected'
   })
 
-HTML list generator:
+CSS class +hmenu-selected+ is special: it will be "opened" on startup
+by the "embedded" JavaScript code (see below).
+
+The +:n+ key will be used to sort list items.
+
+=== HTML list generator:
 
   html_ul_simple = root.to_html_ul
+
+=== Customize behavior
 
 You can add any extra/custom information:
 
@@ -33,14 +41,17 @@ You can add any extra/custom information:
 And then match within a code block to ``mangle'' the output:
 
   html_ul = root.to_html_ul do |node, output| # code block is optional!
-  if
-      node.content.respond_to? :[] and
-      node.content[:custom_info].class == Object
+    if
+        node.content.respond_to? :[] and
+        node.content[:custom_info].class == Object
 
-    output[:name] += ' (extra_info is just an Object)'  # edit text
-    output[:extra_class] = 'hmenu-selected'             # add a CSS class
-    output[:href] = nil                                 # turn off hyperref
+      output[:name] += ' (extra_info is just an Object)'  # edit text
+      output[:extra_class] = 'hmenu-selected'             # add a CSS class
+      output[:href] = nil                                 # turn off hyperref
+    end
   end
+
+=== Style and JavaScript to show/hide: complete HTML output
 
 Some Style (HMenu::CSS), and some JavaScript code (HMenu::JS) to show/hide 
 submenus:
