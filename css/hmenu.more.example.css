@@ -1,0 +1,55 @@
+
+a, .hmenu-bullet {
+  color: blue;
+  text-decoration: none;
+}
+
+a {
+  font-weight: bold;
+}
+
+a:hover   {
+  color: white; 
+  background: blue; 
+} 
+
+.hmenu-bullet:hover  {
+  color: green;
+}
+
+.hmenu-content {
+  padding: 0 0.3em;
+}
+
+.menu-content a {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+}
+
+li span.hmenu-selected, li div.hmenu-selected {
+  font-weight: bold;
+  color: green; 
+}
+
+li.hmenu-selected > .hmenu-bullet, 
+li.hmenu-selected > .hmenu-bullet-nochildren {
+  color: green;
+}
+
+/* border-aligment hack... */
+ul.hmenu li.hmenu-selected, ul.hmenu-submenu li.hmenu-selected {
+  border-left: 1px green solid; 
+  padding-left: 4px;  /* 4px + 1px = 5px */
+}
+ul.hmenu li, ul.hmenu-submenu li {
+  padding: 0 5px;     /* 4px + 1px = 5px */
+}
+
+span.hmenu-root, div.hmenu-root {
+  font-weight: bold;
+  border: none;
+}
+
+
