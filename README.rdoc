@@ -1,7 +1,12 @@
 = Hierarchical Menu
 
-Hierarchical menu, based on <tt>rubytree gem</tt>. Outputs html (other formats
+Hierarchical menu, based on <tt>rubytree</tt> gem. Outputs html (other formats
 planned) with optional JavaScript show/hide.
+
+== Example client code.
+
+See +examples/example.rb+ and +examples/example.css+ in  the distribution
+directory.
 
 == Synopsis
 
@@ -63,7 +68,7 @@ submenus:
     </script>
     <style type="text/css">
       #{HMenu::CSS.out} 
-      #{File.read File.join HMenu::ROOTDIR, 'css/hmenu.more.example.css'}
+      #{File.read File.join HMenu::ROOTDIR, 'examples/example.css'}
     </style>
   </head>
   <body onload="reset_menus();">

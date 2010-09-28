@@ -6,14 +6,18 @@ require 'tree'
 
 module Tree
   class TreeNode
+    # Has the same effect of using Tree::TreeNode#<< multiple time
+    # but with a filepath-like syntax:
+    #
+    #   node.add_recursive '/path/to/a/deep/node', "MyContent"
+    #
+    # A leading slash in the path means that it is absolute (i.e. refers 
+    # to the tree root) 
+    #
+    # path may be an Array (instead of String), but this is intended for
+    # "private" use only (i.e. recursive calls)  
+    #
     def add_recursive(path, content)
-      #
-      # A leading slash in the path means that it is absolute (i.e. refers 
-      # to the tree root) 
-      #
-      # path may be an Array (instead of String), but this is intended for
-      # "private" use only (i.e. recursive calls)  
-      #
       if path.respond_to? :split
         path = path.split('/') 
       end

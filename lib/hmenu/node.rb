@@ -6,9 +6,45 @@ require 'hmenu/extensions/tree'
 module HMenu
   class Node < Tree::TreeNode
 
+    # See #Tree::TreeNode#add_recursive .
+    #
+    # +content_hash+ has the following pre-defined keys:
+    # 
+    # +:n+:: Integer, for sorting (default +0+)
+    # 
+    # +:name+:: String, displayed name  (if different from node name takem from the path)
+    #
+    # +:description+:: String, will be rendered as a +title+ HTML attribute
+    #
+    # +:extra_class+:: String, add extra HTML/CSS class; you may also provide a space-separeted list of classes; NOTE: class +hmenu-selected+ is special: the JavaScript code from HMenu::JS.out (function +reset_menus()+) will expand items with such class instead of collasing them.
+    #
+    # You can add any custom keys and use them later for any customization.
+    #
+    def add_path(path, content_hash) # just for docs
+      super(node, content_hash)
+    end
+
+    # Retuns the HTML code for the menu as an unnumbered list.
+    #
+    # A block may optionally be provided to modify the output:
+    #
+    #   html_ul = root.to_html_ul do |node, output| 
+    #     if
+    #         node.content.respond_to? :[] and
+    #         node.content[:extra_info].class == Object
+    # 
+    #       output[:name] += ' (extra_info is just an Object)'
+    #           # modify the dsplayed name
+    #       output[:extra_class] = 'hmenu-selected' 
+    #           # expanded/hghlightd by JS/CSS
+    #       output[:href] = nil
+    #           # turn off hyperlink
+    #     end
+    #   end
+    #
     def to_html_ul(&block)
-      ctag = 'div'
-      btag = 'div'
+      ctag = 'div' # HTML tag for content
+      btag = 'div' # HTML tag for bullets
 
       o = content ? content.clone : nil
       if block.respond_to? :call
@@ -71,6 +107,8 @@ module HMenu
       return s
     end
 
+    protected
+
     def <=>(other) # for sorting
       n <=> other.n 
     end
@@ -80,17 +118,6 @@ module HMenu
         content[:n] ? content[:n] : 0
       rescue
         0
-      end
-    end
-
-    def mangle_output(o, &block)
-      unless o
-        if block.respond_to? :call
-          o = {}
-          block.call(self, o)
-        else
-          o = content.dup
-        end
       end
     end
 

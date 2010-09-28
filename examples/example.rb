@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '../lib'
 
 require 'hmenu'
 
@@ -38,7 +38,7 @@ puts <<END # you may use a template system like ERB if you wish...
   </script>
   <style type="text/css">
     #{HMenu::CSS.out} 
-    #{File.read File.join HMenu::ROOTDIR, 'css/hmenu.more.example.css'}
+    #{File.read File.join HMenu::ROOTDIR, 'examples/hmenu.more.example.css'}
   </style>
 </head>
 <body onload="reset_menus();">

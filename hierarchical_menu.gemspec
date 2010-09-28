@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.email = %q{guido.derosa@vemarsas.it}
   s.files = [
     "README.rdoc",
-    "example.rb",
+    "examples/example.rb",
     "Changelog",
     "css/hmenu.css",
-    "css/hmenu.more.example.css",
+    "examples/hmenu.more.example.css",
     "js/hmenu.js",
     "lib/hmenu.rb",
     "lib/hmenu/extensions/tree.rb",
