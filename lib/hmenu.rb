@@ -1,4 +1,11 @@
 require 'hmenu/constants'
-require 'hmenu/node'
+
+module HMenu
+  autoload :CSS,  'hmenu/css'
+  autoload :JS,   'hmenu/js'
+  autoload :Node, 'hmenu/node'
+end
+
+
 
 

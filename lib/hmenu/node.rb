@@ -10,7 +10,7 @@ module HMenu
       ctag = 'div'
       btag = 'div'
 
-      o = content.clone
+      o = content ? content.clone : nil
       if block.respond_to? :call
         block.call(self, o)
       end
@@ -23,7 +23,7 @@ module HMenu
 
       if o
         hmenu_content_class << ' ' << o[:extra_class] if o[:extra_class]
-        s << "<#{ctag} class=\"#{hmenu_content_class}\" title=\"" << (o[:desc] || '') << '">'
+        s << "<#{ctag} class=\"#{hmenu_content_class}\" title=\"#{(o[:desc] || '')}\">"
         if o[:href]
           s <<
             "<a href=\"#{o[:href]}\">#{o[:name]}</a>" 
@@ -32,7 +32,7 @@ module HMenu
         end
         s << "</#{ctag}>"
       else
-        s << "<#{ctag} class=\"#{hmenu_content_class}\"" << name.capitalize << "</#{ctag}>"
+        s << "<#{ctag} class=\"#{hmenu_content_class}\">" << name.capitalize << "</#{ctag}>"
       end
 
       if hasChildren?
@@ -45,7 +45,7 @@ module HMenu
 
         children.sort.each do |child|
 
-          o = child.content.clone
+          o = child.content ? child.content.clone : nil
           if block.respond_to? :call
             block.call(child, o)
           end
@@ -54,7 +54,7 @@ module HMenu
               child.hasChildren? ? 
                   'hmenu-submenu' : 
                   'hmenu-item'
-          css_li_class << ' ' << o[:extra_class] if o[:extra_class]
+          css_li_class << ' ' << o[:extra_class] if o and o[:extra_class]
           css_bullet_class = 
               child.hasChildren? ? 
                   'hmenu-bullet' : 
