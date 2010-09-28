@@ -21,7 +21,7 @@ module HMenu
     # You can add any custom keys and use them later for any customization.
     #
     def add_path(path, content_hash) # just for docs
-      super(node, content_hash)
+      super(path, content_hash)
     end
 
     # Retuns the HTML code for the menu as an unnumbered list.

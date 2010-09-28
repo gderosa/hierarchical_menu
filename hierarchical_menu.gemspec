@@ -6,6 +6,8 @@ require 'date'
 require 'hmenu/constants'
 
 Gem::Specification.new do |s|
+  s.has_rdoc = true
+
   s.name = %q{hierarchical_menu}
   s.version = HMenu::VERSION
 
