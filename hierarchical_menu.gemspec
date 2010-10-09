@@ -35,5 +35,5 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc"]
   s.require_paths = ["lib"]
   s.summary = %q{Hierarchical menus with html output}
-  s.add_dependency 'rubytree'
+  s.add_dependency 'rubytree', '>= 0.8.0'
 end
