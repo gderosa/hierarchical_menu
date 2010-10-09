@@ -55,7 +55,7 @@ module HMenu
 
       hmenu_content_class = "hmenu-content"
 
-      hmenu_content_class << " hmenu-root" if isRoot?
+      hmenu_content_class << " hmenu-root" if is_root?
 
       if o
         hmenu_content_class << ' ' << o[:extra_class] if o[:extra_class]
@@ -71,9 +71,9 @@ module HMenu
         s << "<#{ctag} class=\"#{hmenu_content_class}\">" << name.capitalize << "</#{ctag}>"
       end
 
-      if hasChildren?
+      if has_children?
 
-        if isRoot? 
+        if is_root? 
           s += '<ul class="hmenu">'
         else
           s += "<ul>"
@@ -87,12 +87,12 @@ module HMenu
           end
 
           css_li_class =  
-              child.hasChildren? ? 
+              child.has_children? ? 
                   'hmenu-submenu' : 
                   'hmenu-item'
           css_li_class << ' ' << o[:extra_class] if o and o[:extra_class]
           css_bullet_class = 
-              child.hasChildren? ? 
+              child.has_children? ? 
                   'hmenu-bullet' : 
                   'hmenu-bullet-nochildren'
 
