@@ -16,7 +16,7 @@ module HMenu
     #
     # +:description+:: String, will be rendered as a +title+ HTML attribute
     #
-    # +:extra_class+:: String, add extra HTML/CSS class; you may also provide a space-separeted list of classes; NOTE: class +hmenu-selected+ is special: the JavaScript code from HMenu::JS.out (function +reset_menus()+) will expand items with such class instead of collasing them.
+    # +:extra_class+:: String, add extra HTML/CSS class; you may also provide a space-separeted list of classes; NOTE: class +hmenu-selected+ is special: the JavaScript code from HMenu::JS.out (function +reset_menus()+) will expand items with such class instead of collapsing them.
     #
     # You can add any custom keys and use them later for any customization.
     #
@@ -57,6 +57,7 @@ module HMenu
 
       hmenu_content_class << " hmenu-root" if is_root?
 
+      # TODO: use displayed_name
       if o
         hmenu_content_class << ' ' << o[:extra_class] if o[:extra_class]
         s << "<#{ctag} class=\"#{hmenu_content_class}\" title=\"#{(o[:desc] || '')}\">"
@@ -109,8 +110,13 @@ module HMenu
 
     protected
 
+    def displayed_name
+      content and content[:name] or name.capitalize
+    end
+
     def <=>(other) # for sorting
-      n <=> other.n 
+      return displayed_name <=> other.displayed_name if n == other.n 
+      return n              <=> other.n
     end
 
     def n
